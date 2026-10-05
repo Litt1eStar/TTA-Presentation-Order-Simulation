@@ -1,0 +1,14 @@
+# Copied to /opt/tta-order/ on the droplet by the deploy workflow.
+name: tta-order
+
+services:
+  tta-order:
+    image: ghcr.io/litt1estar/tta-order:latest
+    restart: unless-stopped
+    expose:
+      - "80"
+
+networks:
+  default:
+    name: cmm_default
+    external: true
