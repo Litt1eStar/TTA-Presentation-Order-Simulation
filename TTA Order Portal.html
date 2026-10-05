@@ -287,47 +287,70 @@
     font-size:clamp(11px,1.1vw,17px);letter-spacing:.05em;line-height:1.2;padding:1px 10px;border-radius:999px;color:#fff;
     background:rgba(8,14,44,.86);border:1.5px solid var(--c1);box-shadow:0 4px 12px rgba(0,0,0,.45)}
 
-  /* intro */
-  #intro{position:fixed;inset:0;z-index:66;display:none;overflow:hidden;--acc:#4da8e8}
+  /* intro: F1 broadcast opener */
+  #intro{position:fixed;inset:0;z-index:66;display:none;overflow:hidden;--acc:#ff8d20}
   #intro.play{display:block}
   #intro.out{animation:introOut .85s cubic-bezier(.6,0,.2,1) forwards}
   @keyframes introOut{to{transform:translateY(-102%)}}
   .intro-bg{position:absolute;inset:0;background:
-    radial-gradient(62% 60% at 50% 44%,color-mix(in srgb,var(--acc) 34%,transparent),transparent 70%),
-    radial-gradient(50% 40% at 50% 108%,color-mix(in srgb,var(--acc) 22%,transparent),transparent 65%),
-    linear-gradient(180deg,var(--bg-1),var(--bg-0) 82%)}
-  .strip{position:absolute;left:-12%;right:-12%;display:flex;gap:clamp(28px,5vw,86px);white-space:nowrap;font-size:clamp(42px,8.5vw,130px);opacity:.15;pointer-events:none;
-    filter:drop-shadow(0 0 22px color-mix(in srgb,var(--acc) 45%,transparent))}
-  .strip span{display:inline-block}
-  .s-top{top:7%;animation:marqL 20s linear infinite}.s-bot{bottom:7%;animation:marqR 24s linear infinite}
+    radial-gradient(60% 55% at 50% 46%,rgba(255,141,32,.20),transparent 70%),
+    radial-gradient(45% 35% at 50% 110%,rgba(42,159,247,.22),transparent 65%),
+    linear-gradient(180deg,#0a0f33,#04071a 85%)}
+  .carbon{position:absolute;inset:0;opacity:.55;background:
+    linear-gradient(45deg,rgba(255,255,255,.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.05) 75%) 0 0/8px 8px,
+    linear-gradient(45deg,rgba(255,255,255,.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,.05) 75%) 4px 4px/8px 8px;
+    -webkit-mask-image:radial-gradient(75% 70% at 50% 50%,#000,transparent);mask-image:radial-gradient(75% 70% at 50% 50%,#000,transparent)}
+  .streak{position:absolute;left:-30%;width:60%;height:clamp(3px,.5vh,7px);transform:skewX(-35deg);opacity:0;
+    background:linear-gradient(90deg,transparent,var(--c),transparent);filter:drop-shadow(0 0 10px var(--c))}
+  #intro.play .streak{animation:streakRun 1.5s cubic-bezier(.4,0,.2,1) var(--sd) infinite}
+  @keyframes streakRun{0%{opacity:0;transform:translateX(0) skewX(-35deg)}15%{opacity:.9}100%{opacity:0;transform:translateX(300%) skewX(-35deg)}}
+  .chk{position:absolute;left:0;right:0;height:clamp(14px,2.4vh,26px);z-index:3;
+    background:conic-gradient(#fff 25%,#111 0 50%,#fff 0 75%,#111 0) 0 0/calc(clamp(14px,2.4vh,26px)*2) calc(clamp(14px,2.4vh,26px)*2);opacity:.9;animation:chkrun 1s linear infinite}
+  .chk.t{top:0}.chk.b{bottom:0;animation-direction:reverse}
+  @keyframes chkrun{to{background-position:calc(clamp(14px,2.4vh,26px)*2) 0}}
+  .strip{position:absolute;left:0;width:max-content;display:flex;gap:clamp(12px,1.6vw,28px);pointer-events:none;z-index:2}
+  .s-top{top:clamp(26px,5vh,52px);animation:marqL 40s linear infinite}
+  .s-bot{bottom:clamp(26px,5vh,52px);animation:marqR 46s linear infinite}
   @keyframes marqL{to{transform:translateX(-50%)}}@keyframes marqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-  .intro-core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,1.6vh,20px);text-align:center;padding:0 6vw}
-  .intro-hero{font-size:clamp(72px,13vw,210px);line-height:1;opacity:0;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
-  #intro.play .intro-hero{animation:heroIn 1s cubic-bezier(.2,1.35,.35,1) .15s forwards}
-  @keyframes heroIn{0%{opacity:0;transform:scale(.4) rotate(-160deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-  .intro-eyebrow{font-weight:700;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-dim);font-size:clamp(10px,1vw,15px);opacity:0}
-  #intro.play .intro-eyebrow{animation:fadeUp .7s ease .5s forwards}
-  .intro-name{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:.92;font-size:clamp(40px,9.5vw,168px);text-wrap:balance;max-width:16ch;
-    background:linear-gradient(92deg,#fff,color-mix(in srgb,var(--acc) 70%,#fff) 48%,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;
-    filter:drop-shadow(0 0 34px color-mix(in srgb,var(--acc) 55%,transparent));opacity:0;transform:translateY(28px) scale(1.12)}
-  #intro.play .intro-name{animation:nameIn 1.05s cubic-bezier(.2,1,.3,1) .75s forwards}
-  @keyframes nameIn{0%{opacity:0;transform:translateY(28px) scale(1.12);filter:blur(12px)}60%{opacity:1}100%{opacity:1;transform:none;filter:blur(0)}}
-  .intro-tag{font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);font-size:clamp(11px,1.15vw,17px);opacity:0}
-  #intro.play .intro-tag{animation:fadeUp .7s ease 1.7s forwards,tagPulse 1.6s ease-in-out 2.4s infinite}
+  .lg{display:flex;align-items:center;gap:clamp(8px,.9vw,14px);padding:clamp(5px,.7vh,9px) clamp(14px,1.5vw,26px) clamp(5px,.7vh,9px) clamp(6px,.6vw,10px);
+    background:linear-gradient(100deg,color-mix(in srgb,var(--c) 70%,#000),color-mix(in srgb,var(--c) 22%,#0a0f33) 70%);
+    clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%);border-left:clamp(4px,.4vw,7px) solid var(--c);opacity:.92}
+  .lgc{width:clamp(34px,4.6vh,56px);height:clamp(34px,4.6vh,56px);border-radius:50%;background:#fff;display:grid;place-items:center;flex:none;box-shadow:0 0 0 2px var(--c)}
+  .lgc img{max-width:76%;max-height:76%;object-fit:contain;display:block}
+  .lgc b{font-family:"Anton",sans-serif;font-weight:400;color:#111;font-size:clamp(12px,1.5vh,18px)}
+  .lg i{font-style:normal;font-family:"Anton",sans-serif;letter-spacing:.06em;color:#fff;font-size:clamp(16px,2.3vh,28px);text-transform:uppercase}
+  .intro-core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,1.8vh,22px);text-align:center;padding:0 6vw}
+  .intro-logo{width:clamp(150px,34vh,330px);height:clamp(84px,19vh,185px);border-radius:14px;transform:skewX(-8deg);background:#fff;display:grid;place-items:center;opacity:0;
+    box-shadow:0 0 0 clamp(4px,.6vh,8px) var(--acc),0 0 0 clamp(8px,1.2vh,16px) rgba(255,255,255,.12),0 0 60px rgba(255,141,32,.55)}
+  .intro-logo img{width:86%;height:86%;transform:skewX(8deg);object-fit:contain}
+  #intro.play .intro-logo{animation:logoIn .9s cubic-bezier(.2,1.3,.35,1) .2s forwards}
+  @keyframes logoIn{0%{opacity:0;transform:translateX(-120vw) skewX(-8deg)}100%{opacity:1;transform:skewX(-8deg)}}
+  .intro-eyebrow{font-weight:700;letter-spacing:.42em;text-transform:uppercase;color:var(--amber);font-size:clamp(10px,1vw,15px);opacity:0}
+  #intro.play .intro-eyebrow{animation:fadeUp .7s ease .6s forwards}
+  .intro-name{font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:.95;font-size:clamp(30px,5.2vw,92px);max-width:22ch;color:#fff;
+    padding:.08em .5em .1em;background:linear-gradient(95deg,#ff5f1c,#ff8d20 55%,#ffc525);transform:skewX(-12deg);opacity:0;
+    clip-path:polygon(0 0,100% 0,calc(100% - .28em) 100%,.28em 100%);text-shadow:0 .04em 0 rgba(0,0,0,.28);filter:drop-shadow(0 0 30px rgba(255,141,32,.45))}
+  .intro-name span{display:inline-block;transform:skewX(12deg)}
+  #intro.play .intro-name{animation:panelIn .75s cubic-bezier(.2,1,.3,1) .85s forwards}
+  @keyframes panelIn{0%{opacity:0;transform:translateX(-90vw) skewX(-12deg)}100%{opacity:1;transform:skewX(-12deg)}}
+  .intro-tag{display:flex;align-items:center;gap:clamp(10px,1.2vw,18px);font-family:"Anton",sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#fff;font-size:clamp(12px,1.5vw,22px);opacity:0}
+  #intro.play .intro-tag{animation:fadeUp .6s ease 1.6s forwards}
+  .dots{display:flex;gap:clamp(5px,.5vw,8px)}
+  .dots u{width:clamp(9px,1vw,15px);height:clamp(9px,1vw,15px);border-radius:50%;background:var(--d);opacity:.25;box-shadow:0 0 12px var(--d)}
+  #intro.play .dots u{animation:dotLit 1.2s steps(1) infinite}
+  .dots u:nth-child(2){animation-delay:.3s!important}.dots u:nth-child(3){animation-delay:.6s!important}
+  @keyframes dotLit{0%{opacity:1}30%{opacity:.25}100%{opacity:.25}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  @keyframes tagPulse{0%,100%{opacity:.55}50%{opacity:1}}
-  .wipe{position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);background:linear-gradient(105deg,transparent 40%,color-mix(in srgb,var(--acc) 65%,#fff) 50%,transparent 60%)}
+  .wipe{position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);z-index:5;background:linear-gradient(105deg,transparent 40%,#ffb15a 50%,transparent 60%)}
   #intro.out .wipe{animation:wipe .85s ease forwards}
   @keyframes wipe{to{transform:translateX(130%)}}
-  .mock-tag{position:absolute;bottom:14px;right:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:clamp(8px,.72vw,11px);color:var(--ink-faint);background:rgba(10,16,46,.6);border:1px solid var(--line);padding:4px 12px;border-radius:999px}
-  .intro-cta{position:absolute;left:50%;bottom:clamp(40px,8vh,90px);transform:translate(-50%,0);z-index:2;
-    font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:clamp(11px,1.1vw,15px);color:#fff;
-    background:rgba(255,255,255,.08);border:1px solid color-mix(in srgb,var(--acc) 50%,var(--line));border-radius:999px;padding:10px 22px;
-    backdrop-filter:blur(4px);opacity:0}
-  #intro.play .intro-cta{animation:ctaIn .7s ease 2.4s forwards,ctaPulse 1.8s ease-in-out 3.1s infinite}
+  .intro-cta{position:absolute;left:50%;bottom:calc(clamp(26px,5vh,52px) + clamp(34px,4.6vh,56px) + clamp(24px,5vh,50px));transform:translate(-50%,0);z-index:4;white-space:nowrap;
+    font-family:"Anton",sans-serif;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(12px,1.3vw,19px);color:#111;
+    background:linear-gradient(95deg,#ff8d20,#ffc525);padding:.7em 2em;clip-path:polygon(.8em 0,100% 0,calc(100% - .8em) 100%,0 100%);opacity:0}
+  #intro.play .intro-cta{animation:ctaIn .7s ease 2.2s forwards,ctaPulse 1.2s ease-in-out 2.9s infinite}
   #intro.auto .intro-cta{display:none}
   @keyframes ctaIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
-  @keyframes ctaPulse{0%,100%{opacity:.62}50%{opacity:1}}
+  @keyframes ctaPulse{0%,100%{filter:brightness(.85)}50%{filter:brightness(1.25)}}
 
   header,.dock{display:none!important}   /* clean stage: no header/footer */
 
@@ -354,17 +377,22 @@
 
 <div id="intro">
   <div class="intro-bg"></div>
-  <div class="strip s-top" id="stripTop"></div>
+  <div class="carbon"></div>
+  <div class="streak" style="top:22%;--c:#ff5f1c;--sd:.0s"></div>
+  <div class="streak" style="top:38%;--c:#2a9ff7;--sd:.5s"></div>
+  <div class="streak" style="top:62%;--c:#ffc525;--sd:.9s"></div>
+  <div class="streak" style="top:78%;--c:#ff8d20;--sd:.3s"></div>
+    <div class="strip s-top" id="stripTop"></div>
   <div class="strip s-bot" id="stripBot"></div>
   <div class="intro-core">
-    <div class="intro-hero" id="introHero">🌀</div>
+    <div class="intro-logo"><img id="introLogo" alt=""></div>
     <div class="intro-eyebrow">Award 2027 · Hosted by KMUTT</div>
-    <div class="intro-name" id="introName">Thailand Teaching Academy</div>
-    <div class="intro-tag" id="introTag">Presentation order draw</div>
+    <div class="intro-name"><span id="introName">Thailand Teaching Academy</span></div>
+    <div class="intro-tag" id="introTag"><span class="dots"><u style="--d:#ff3b30"></u><u style="--d:#ffc525"></u><u style="--d:#34d96b"></u></span><span>Presentation order draw</span></div>
   </div>
   <div class="intro-cta" id="introCta">▶ Click anywhere to draw the order</div>
   <div class="wipe"></div>
-  <div class="mock-tag">Intro motion-graphic · mockup</div>
+</div>
 </div>
 
 <div class="stage" id="stage">
@@ -926,25 +954,19 @@ function runConf(){confRunning=true;(function loop(){cx.clearRect(0,0,cw,ch);pie
   if(pieces.length)requestAnimationFrame(loop);else{cx.clearRect(0,0,cw,ch);confRunning=false}})()}
 
 /* intro (mockup placeholder for a future motion graphic) */
-const intro=document.getElementById('intro'),introName=document.getElementById('introName'),introHero=document.getElementById('introHero'),
-  introTag=document.getElementById('introTag'),stripTop=document.getElementById('stripTop'),stripBot=document.getElementById('stripBot');
+const intro=document.getElementById('intro'),introName=document.getElementById('introName'),introLogo=document.getElementById('introLogo'),
+  stripTop=document.getElementById('stripTop'),stripBot=document.getElementById('stripBot');
 let introTimer;
-function themeFor(name){const n=(name||'').toLowerCase();const T=[
-  [/(short\s*film|short\s*movie|movie|film|cinema|video|director|screen)/,{i:['🎬','🎞️','🎥','🍿','⭐','📽️'],a:'#e14b4b'}],
-  [/(music|song|sing|choir|band|instrument)/,{i:['🎵','🎤','🎧','🎼','🎹','🎶'],a:'#a06bff'}],
-  [/(danc|ballet)/,{i:['💃','🕺','🩰','🎶','✨'],a:'#ff5da2'}],
-  [/(art|paint|draw|design|sketch)/,{i:['🎨','🖌️','🖍️','✏️','🖼️'],a:'#ff9f43'}],
-  [/(sport|run|race|athlet|soccer|foot|basket|game)/,{i:['🏆','🏃','⚽','🥇','🔥'],a:'#28c76f'}],
-  [/(science|robot|tech|code|program|innovat|math|engineer)/,{i:['🔬','🧪','💻','🤖','⚗️','🧠'],a:'#26d0ce'}],
-  [/(cook|food|chef|culinar|baking)/,{i:['🍳','👨‍🍳','🍽️','🔥','🥘'],a:'#ff7043'}],
-  [/(speech|debat|present|orator|story)/,{i:['🎙️','🗣️','📣','💬'],a:'#f2b01e'}],
-  [/(teach|teacher|academy|educat|class|lesson|student)/,{i:['📚','🎓','✏️','🍎','🔔','📝'],a:'#4da8e8'}]];
-  for(const [re,v] of T)if(re.test(n))return v;return{i:['🌀','✨','🏆','⭐','🎉'],a:'#4da8e8'}}
-function fillStrip(el,icons){let s='';for(let k=0;k<3;k++)for(const ic of icons)s+='<span>'+ic+'</span>';el.innerHTML=s+s}
+function logoStrip(el,rev){
+  const base=(data&&data.length?data:Object.keys(UNI)).slice();if(rev)base.reverse();
+  let one='';for(let k=0;k<2;k++)for(const n of base){const e=emblem(n);
+    one+=`<div class="lg" style="--c:${e.c1}"><span class="lgc">${e.logo?`<img src="${e.logo}" alt="">`:`<b>${e.ini}</b>`}</span><i>${String(n).toUpperCase()}</i></div>`}
+  el.innerHTML=one+one;
+}
 function playIntro(cb){
-  const name=(document.getElementById('compType').textContent||'Competition').trim();const th=themeFor(name);
-  intro.style.setProperty('--acc',th.a);introName.textContent=name;introHero.textContent=th.i[0];introTag.textContent='Presentation order draw';
-  fillStrip(stripTop,th.i);fillStrip(stripBot,th.i.slice().reverse());
+  const name=(document.getElementById('compType').textContent||'Competition').trim();
+  introName.textContent=name;introLogo.src=LOGO_SM;
+  logoStrip(stripTop,false);logoStrip(stripBot,true);
   intro.classList.remove('out','auto');
   if(cb)intro.classList.add('auto');                         /* button path: auto-advance, hide the click prompt */
   intro.classList.add('play');void intro.offsetWidth;
@@ -989,5 +1011,6 @@ seedEl.textContent='—';
 showScene();
 playIntro();            /* default: Intro holds with a click prompt */
 </script>
+
 
 </body></html>
